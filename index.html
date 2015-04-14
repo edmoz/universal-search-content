@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Universal Search</title>
+  <link rel="stylesheet" href="/styles/vendor/normalize.css">
+  <link rel="stylesheet" href="/styles/main.css">
+</head>
+<body>
+  <div id="top-hits" class="result-region"></div>
+  <div id="search-suggestions" class="result-region"></div>
+  <div id="autocomplete-results" class="result-region"></div>
+
+  <script id="top-hits-template" type="text/html">
+    <ol>
+      <% hits.forEach(function (hit) { %>
+        <li class="result">
+          <span class="icon <%= hit.get('type') %>"></span>
+          <span class="icon default-favicon"><img src="https://ucygetfavicon.appspot.com/<%= encodeURIComponent(hit.get('url')) %>?defaulticon=none"></span>
+          <span class="result-copy">
+            <% if (hit.get('title')) { %>
+              <%= hit.get('title') %> &mdash;
+            <% } %>
+            <span class="result-url">
+              <%= hit.get('url') %>
+            </span>
+          </span>
+        </li>
+      <% }); %>
+    </ol>
+  </script>
+
+  <script id="search-suggestions-template" type="text/html">
+  <% if (remoteSuggestions.length) { %>
+    <h2 class="result-group-title">Search Suggestions</h2>
+    <ol>
+      <% remoteSuggestions.forEach(function (suggestion) { %>
+        <li class="result">
+          <span class="icon null"></span>
+          <span class="icon search-result"></span>
+          <span class="result-term result-copy">
+            <%= suggestion.get('term') %>
+          </span>
+        </li>
+      <% }); %>
+    </ol>
+  <% } %>
+  </script>
+
+  <script id="autocomplete-results-template" type="text/html">
+  <% if (results.length) { %>
+    <h2 class="result-group-title">Bookmarks &amp; History</h2>
+    <ol>
+      <% results.forEach(function (result, index) { %>
+        <li class="result">
+          <span class="icon <%= result.get('type') %>"></span>
+          <span class="icon default-favicon"><img src="https://ucygetfavicon.appspot.com/<%= encodeURIComponent(result.get('url')) %>?defaulticon=none"></span>
+          <span class="result-copy">
+            <% if (result.get('title')) { %>
+              <%= result.get('title') %> &mdash;
+            <% } %>
+            <span class="result-url">
+              <%= result.get('url') %>
+            </span>
+          </span>
+        </li>
+      <% }); %>
+    </ol>
+  <% } %>
+  </script>
+
+  <script src="/scripts/vendor/jquery.min.js"></script>
+  <script src="/scripts/vendor/lodash.min.js"></script>
+  <script src="/scripts/vendor/backbone.min.js"></script>
+  <script src="/scripts/adapters.js"></script>
+  <script src="/scripts/main.js"></script>
+</body>
+</html>

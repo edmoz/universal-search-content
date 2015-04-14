@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Universal Search</title>
+  <link rel="stylesheet" href="/styles/vendor/normalize.css">
+  <link rel="stylesheet" href="/styles/main.css">
+</head>
+<body>
+  <h1>universal-search-content</h1><p>the iframe that we put inside the autocomplete dropdown</p>
+<h2>setup</h2><ol>
+<li><code>npm install -g harp</code></li>
+<li><code>harp server</code></li>
+<li>navigate to <a href="http://localhost:9000/">http://localhost:9000/</a></li>
+</ol>
+<h2>how to use with your custom gecko</h2><ol>
+<li>make sure the server is running with <code>harp server</code></li>
+<li>build gecko-dev following <a href="">the instructions</a></li>
+<li>when the custom nightly opens up, add prefs:<ul>
+<li>surf to <code>about:config</code></li>
+<li>create a new pref (right-click in the main pref area, then choose New &gt; String)</li>
+<li>name it <code>services.universalSearch.frameURL</code></li>
+<li>set its value to the complete path to the iframe URL, for example, <code>http://localhost:9000/index.html</code></li>
+<li>create another new String pref</li>
+<li>name it <code>services.universalSearch.baseURL</code></li>
+<li>set its value to the scheme and domain part of the iframe URL, for example, <code>http://localhost:9000</code></li>
+</ul>
+</li>
+<li>bask in our collective glory</li>
+</ol>
+<h2>documenting the postmessage API with the autocomplete code</h2><p><a href="https://gist.github.com/6a68/48bf56e5b66e8631b522">https://gist.github.com/6a68/48bf56e5b66e8631b522</a></p>
+</body>
+</html>
